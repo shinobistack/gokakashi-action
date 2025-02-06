@@ -1,0 +1,52 @@
+name: 'goKakashi Scan'
+description: 'A GitHub Action to trigger and fetch image scans using goKakashi CLI.'
+author: 'goKakashi Team'
+branding:
+  icon: 'shield'
+  color: 'blue'
+
+inputs:
+  image:
+    description: 'The container image to scan.'
+    required: false
+  labels:
+    description: 'Add labels to scan.'
+    required: false
+  policy:
+    description: 'The policy to use for the scan.'
+    required: false
+  server:
+    description: 'The server URL where goKakashi API is hosted.'
+    required: true
+  token:
+    description: 'Authentication token for the server.'
+    required: true
+  cf_client_id:
+    description: 'Cloudflare Access Client ID (optional).'
+    required: false
+  cf_client_secret:
+    description: 'Cloudflare Access Client Secret (optional).'
+    required: false
+  scan_id:
+    description: 'The scan ID to check the status of a previously triggered scan.'
+    required: false
+  interval:
+    description: 'Interval in seconds to check the scan status (default: 10).'
+    required: false
+    default: 10
+  retries:
+    description: 'Number of retries before failing the build (default: 10).'
+    required: false
+    default: 10
+  gokakashi_version:
+    description: 'The version of gokakashi to use (e.g., v0.1.0, v1.0.0).'
+    required: false
+    default: 'latest'
+
+outputs:
+  report_url:
+    description: 'URL of the scan report associated with the scan ID.'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
