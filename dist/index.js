@@ -27445,7 +27445,7 @@ var __webpack_exports__ = {};
         // Pull gokakashi binary
         const isLatest = gokakashiVersion === 'latest';
         const downloadUrl = isLatest
-            ? 'https://github.com/shinobistack/gokakashi/releases/latest/download/gokakashi-linux-arm64'
+            ? 'https://github.com/shinobistack/gokakashi/releases/latest/download/gokakashi-linux-amd64'
             : `https://github.com/shinobistack/gokakashi/releases/download/${gokakashiVersion}/gokakashi-linux-amd64`;
 
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Pulling gokakashi binary version: ${gokakashiVersion}`);
