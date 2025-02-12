@@ -24,12 +24,19 @@ import * as exec from '@actions/exec';
         }
 
         // Export Cloudflare Tokens as environment variables
-        process.env.CF_ACCESS_CLIENT_ID = cfClientID;
-        process.env.CF_ACCESS_CLIENT_SECRET = cfClientSecret;
+        if (cfClientID && cfClientSecret) {
+            process.env.CF_ACCESS_CLIENT_ID = cfClientID;
+            process.env.CF_ACCESS_CLIENT_SECRET = cfClientSecret;
+        }
 
         // Pull gokakashi binary
+        const isLatest = gokakashiVersion === 'latest';
+        const downloadUrl = isLatest
+            ? 'https://github.com/shinobistack/gokakashi/releases/latest/download/gokakashi-linux-arm64'
+            : `https://github.com/shinobistack/gokakashi/releases/download/${gokakashiVersion}/gokakashi-linux-amd64`;
+
         core.info(`Pulling gokakashi binary version: ${gokakashiVersion}`);
-        await exec.exec(`wget https://github.com/shinobistack/gokakashi/releases/download/${gokakashiVersion}/gokakashi-linux-amd64 -O gokakashi`);
+        await exec.exec(`wget ${downloadUrl} -O gokakashi`);
         await exec.exec('chmod +x gokakashi');
 
         // Install Trivy
