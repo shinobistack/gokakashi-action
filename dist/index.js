@@ -27417,11 +27417,11 @@ var __webpack_exports__ = {};
 (async () => {
     try {
         // Inputs
-        const image = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('image');
-        const labels = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('labels');
-        const policy = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('policy');
-        const server = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('server');
-        const token = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('token');
+        const image = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('image', { required: true });
+        const labels = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('labels', { required: true });
+        const policy = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('policy', { required: true });
+        const server = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('server', { required: true });
+        const token = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('token', { required: true });
         const cfClientID = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('cf_client_id');
         const cfClientSecret = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('cf_client_secret');
         const scanIdInput = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('scan_id');
@@ -27437,12 +27437,19 @@ var __webpack_exports__ = {};
         }
 
         // Export Cloudflare Tokens as environment variables
-        process.env.CF_ACCESS_CLIENT_ID = cfClientID;
-        process.env.CF_ACCESS_CLIENT_SECRET = cfClientSecret;
+        if (cfClientID && cfClientSecret) {
+            process.env.CF_ACCESS_CLIENT_ID = cfClientID;
+            process.env.CF_ACCESS_CLIENT_SECRET = cfClientSecret;
+        }
 
         // Pull gokakashi binary
+        const isLatest = gokakashiVersion === 'latest';
+        const downloadUrl = isLatest
+            ? 'https://github.com/shinobistack/gokakashi/releases/latest/download/gokakashi-linux-arm64'
+            : `https://github.com/shinobistack/gokakashi/releases/download/${gokakashiVersion}/gokakashi-linux-amd64`;
+
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Pulling gokakashi binary version: ${gokakashiVersion}`);
-        await _actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec(`wget https://github.com/shinobistack/gokakashi/releases/download/${gokakashiVersion}/gokakashi-linux-amd64 -O gokakashi`);
+        await _actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec(`wget ${downloadUrl} -O gokakashi`);
         await _actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec('chmod +x gokakashi');
 
         // Install Trivy
