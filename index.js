@@ -4,11 +4,11 @@ import * as exec from '@actions/exec';
 (async () => {
     try {
         // Inputs
-        const image = core.getInput('image');
-        const labels = core.getInput('labels');
-        const policy = core.getInput('policy');
-        const server = core.getInput('server');
-        const token = core.getInput('token');
+        const image = core.getInput('image', { required: true });
+        const labels = core.getInput('labels', { required: true });
+        const policy = core.getInput('policy', { required: true });
+        const server = core.getInput('server', { required: true });
+        const token = core.getInput('token', { required: true });
         const cfClientID = core.getInput('cf_client_id');
         const cfClientSecret = core.getInput('cf_client_secret');
         const scanIdInput = core.getInput('scan_id');
@@ -24,12 +24,19 @@ import * as exec from '@actions/exec';
         }
 
         // Export Cloudflare Tokens as environment variables
-        process.env.CF_ACCESS_CLIENT_ID = cfClientID;
-        process.env.CF_ACCESS_CLIENT_SECRET = cfClientSecret;
+        if (cfClientID && cfClientSecret) {
+            process.env.CF_ACCESS_CLIENT_ID = cfClientID;
+            process.env.CF_ACCESS_CLIENT_SECRET = cfClientSecret;
+        }
 
         // Pull gokakashi binary
+        const isLatest = gokakashiVersion === 'latest';
+        const downloadUrl = isLatest
+            ? 'https://github.com/shinobistack/gokakashi/releases/latest/download/gokakashi-linux-amd64'
+            : `https://github.com/shinobistack/gokakashi/releases/download/${gokakashiVersion}/gokakashi-linux-amd64`;
+
         core.info(`Pulling gokakashi binary version: ${gokakashiVersion}`);
-        await exec.exec(`wget https://github.com/shinobistack/gokakashi/releases/download/${gokakashiVersion}/gokakashi-linux-amd64 -O gokakashi`);
+        await exec.exec(`wget ${downloadUrl} -O gokakashi`);
         await exec.exec('chmod +x gokakashi');
 
         // Install Trivy
