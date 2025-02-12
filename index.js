@@ -4,11 +4,11 @@ import * as exec from '@actions/exec';
 (async () => {
     try {
         // Inputs
-        const image = core.getInput('image');
-        const labels = core.getInput('labels');
-        const policy = core.getInput('policy');
-        const server = core.getInput('server');
-        const token = core.getInput('token');
+        const image = core.getInput('image', { required: true });
+        const labels = core.getInput('labels', { required: true });
+        const policy = core.getInput('policy', { required: true });
+        const server = core.getInput('server', { required: true });
+        const token = core.getInput('token', { required: true });
         const cfClientID = core.getInput('cf_client_id');
         const cfClientSecret = core.getInput('cf_client_secret');
         const scanIdInput = core.getInput('scan_id');
