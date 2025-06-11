@@ -27428,7 +27428,7 @@ var __webpack_exports__ = {};
         const interval = parseInt(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('interval') || '10', 10);
         const retries = parseInt(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('retries') || '10', 10);
         const gokakashiVersion = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('gokakashi_version') || 'latest';
-        const timeout = parseInt(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('timeout') || '10', 10);
+        const timeout = parseInt(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('timeout') || '5', 10);
 
 
         if (!Number.isInteger(interval) || interval <= 0) {

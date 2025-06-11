@@ -43,9 +43,9 @@ inputs:
     required: false
     default: 'latest'
   timeout:
-    description: 'Timeout in minutes for the scan (optional, default: 10).'
+    description: 'Timeout in minutes for the scan (optional, default: 5).'
     required: false
-    default: 10
+    default: 5
 
 outputs:
   report_url:
