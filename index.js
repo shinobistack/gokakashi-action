@@ -15,6 +15,8 @@ import * as exec from '@actions/exec';
         const interval = parseInt(core.getInput('interval') || '10', 10);
         const retries = parseInt(core.getInput('retries') || '10', 10);
         const gokakashiVersion = core.getInput('gokakashi_version') || 'latest';
+        const timeout = parseInt(core.getInput('timeout') || '5', 10);
+
 
         if (!Number.isInteger(interval) || interval <= 0) {
             throw new Error('Invalid interval. It must be a positive integer.');
@@ -62,7 +64,8 @@ import * as exec from '@actions/exec';
                 `--policy=${policy}`,
                 `--server=${server}`,
                 `--token=${token}`,
-                `--labels=${labels}`
+                `--labels=${labels}`,
+                `--timeout=${timeout}m`
             ], {
                 listeners: {
                     stdout: (data) => {

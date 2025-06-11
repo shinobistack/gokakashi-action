@@ -42,6 +42,10 @@ inputs:
     description: 'The version of gokakashi to use (e.g., v0.1.0, v1.0.0).'
     required: false
     default: 'latest'
+  timeout:
+    description: 'Timeout in minutes for the scan (optional, default: 5).'
+    required: false
+    default: 5
 
 outputs:
   report_url:

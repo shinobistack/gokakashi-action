@@ -13,15 +13,16 @@ The goKakashi GitHub Action allows you to integrate container image vulnerabilit
 
 | Input Name         | Description                                                                | Required | Default     |
 |--------------------|----------------------------------------------------------------------------|----------|-------------|
-| `image`            | The container image to scan.                                              | Yes      | None        |
-| `policy`           | The policy to use for scanning.                                           | Yes      | None        |
-| `server`           | The URL of the goKakashi API server.                                      | Yes      | None        |
-| `token`            | Authentication token for the goKakashi server.                           | Yes      | None        |
-| `cf_client_id`     | Cloudflare Access Client ID (optional).                                   | No       | None        |
-| `cf_client_secret` | Cloudflare Access Client Secret (optional).                               | No       | None        |
-| `interval`         | Interval in seconds to check the scan status.                             | No       | `10`        |
-| `retries`          | Number of retries before marking the scan as failed.                      | No       | `10`        |
-| `gokakashi_version`| The version of goKakashi to use (e.g., `v0.1.0`, `latest`).               | No       | `latest`    |
+| `image`            | The container image to scan.                                               | Yes      | None        |
+| `policy`           | The policy to use for scanning.                                            | Yes      | None        |
+| `server`           | The URL of the goKakashi API server.                                       | Yes      | None        |
+| `token`            | Authentication token for the goKakashi server.                             | Yes      | None        |
+| `cf_client_id`     | Cloudflare Access Client ID (optional).                                    | No       | None        |
+| `cf_client_secret` | Cloudflare Access Client Secret (optional).                                | No       | None        |
+| `interval`         | Interval in seconds to check the scan status.                              | No       | `10`        |
+| `retries`          | Number of retries before marking the scan as failed.                       | No       | `10`        |
+| `gokakashi_version`| The version of goKakashi to use (e.g., `v0.1.0`, `latest`).                | No       | `latest`    |
+| `timeout`          | Timeout in minutes for the scan (optional, default: 5).                    | No       | `10`        |
 
 ---
 
