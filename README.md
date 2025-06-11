@@ -22,6 +22,7 @@ The goKakashi GitHub Action allows you to integrate container image vulnerabilit
 | `interval`         | Interval in seconds to check the scan status.                             | No       | `10`        |
 | `retries`          | Number of retries before marking the scan as failed.                      | No       | `10`        |
 | `gokakashi_version`| The version of goKakashi to use (e.g., `v0.1.0`, `latest`).               | No       | `latest`    |
+| `timeout`          | Timeout in minutes for the scan (optional, default: 10).                  | No       | `10`        |
 
 ---
 
